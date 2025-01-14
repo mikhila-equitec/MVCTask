@@ -1,0 +1,77 @@
+﻿@model StudentCrud.Models.StudentModel
+
+@{
+    ViewBag.Title = "ViewD";
+}
+
+<div class="container" style="max-width:500px; border-radius:3px; background-color:aliceblue; box-shadow:0px 0px 10px 2px; padding:20px; text-align:center;">
+    <h2>Details</h2>
+    <hr />
+    <div style="text-align:center;">
+        <div style="margin-bottom: 15px;">
+            <dt style="font-weight: bold;">
+                @Html.DisplayName("Name")
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.SName)
+            </dd>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <dt style="font-weight: bold;">
+                @Html.DisplayNameFor(model => model.RollNo)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.RollNo)
+            </dd>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <dt style="font-weight: bold;">
+                @Html.DisplayNameFor(model => model.Dept)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Dept)
+            </dd>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <dt style="font-weight: bold;">
+                @Html.DisplayNameFor(model => model.DOB)
+            </dt>
+            <dd>
+                @(Model.DOB.ToString("dd-MM-yyyy"))
+            </dd>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <dt style="font-weight: bold;">
+                @Html.DisplayNameFor(model => model.Gender)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Gender)
+            </dd>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <dt style="font-weight: bold;">
+                @Html.DisplayNameFor(model => model.SAddress)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.SAddress)
+            </dd>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <dt style="font-weight: bold;">
+                @Html.DisplayNameFor(model => model.PhoneNum)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PhoneNum)
+            </dd>
+        </div>
+        <p>
+            @Html.ActionLink("Back to List", "/", null, new { @class = "btn btn-primary" })
+        </p>
+    </div>
+</div>

@@ -1,0 +1,134 @@
+﻿@model IEnumerable<StudentCrud.Models.StudentModel>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+@{
+    ViewBag.Title = "ShowDeleted";
+}
+
+<div class="container border-opacity-25 justify-content-center align-items-center" style=" max-width:1000px;  border-radius:3px; background-color:aliceblue;box-shadow:0px 0px 10px 2px">
+    <br />
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+        <h2>
+            Deleted Students
+        </h2>
+        <div>
+            <button id="printtt" class="btn btn-warning">Print</button>
+            <button id="download" class="btn btn-danger">Download Excel</button>
+        </div>
+    </div>
+    <hr />
+    <br />
+    <table class="table" id="studentsTable">
+        <tr>
+            <th>
+                @Html.DisplayName("Sr no")
+            </th>
+            <th>
+                @Html.DisplayName("Name")
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.RollNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Dept)
+                </th>
+                <th>
+                    @Html.DisplayName("Age")
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Gender)
+                </th>
+                <th>
+                    @Html.DisplayName("Address")
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneNum)
+                </th>*@
+            <th>
+                @Html.DisplayName("Action")
+            </th>
+        </tr>
+        @{ int count = 1;}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @count
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SName)
+                </td>
+                <!--<td>-->
+                @*@Html.DisplayFor(modelItem => item.RollNo)*@
+                <!--</td>
+                <td>-->
+                @*@Html.DisplayFor(modelItem => item.Dept)*@
+                <!--</td>
+
+                <td>-->
+                @*@(DateTime.Now.Subtract(item.DOB).Days/365)*@
+                @*@item.DOB.ToString("dd-MM-yyyy")*@
+                <!--</td>
+                <td>-->
+                @*@Html.DisplayFor(modelItem => item.Gender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNum)*@
+                <!--</td>-->
+                <td>
+                    @*@Html.ActionLink("Restore", "Restore", new { id = item.Id }) |
+                        @Html.ActionLink("View", "Restore", new { id = item.Id }) |
+                        @Html.ActionLink("Delete Permanently ", "DeletePermanent", new { id = item.Id })*@
+                    <a href="@Url.Action("Restore", new { id = item.Id })">
+                        <i class="fa fa-undo" style="font-size:20px;"> <span style="color:black;">|</span></i>
+                    </a>
+                    <a href="@Url.Action("ViewDeleted", new { id = item.Id })">
+                        <i class="fa fa-search" style="font-size:20px;"><span style="color:black; padding-left:10px">|</span></i>
+                    </a>
+
+
+                </td>
+                @*@Html.Value(Convert.ToInt32(@count = @count + 1))*@
+                @{ count = count + 1; }
+            </tr>
+
+        }
+
+    </table>
+    <br />
+
+</div>
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script>
+        //$("#printtt").click(function () {
+        //    var print = document.getElementById("studentsTable");
+        //    var ori = document.body.innerHTML;
+        //    document.body.innerHTML = "<h2>Deleted Student List</h2>" + print;
+        //    window.print();
+        //    document.body.innerHTML = ori;
+        //    location.reload();
+        //});
+
+        $("#printtt").click(function () {
+            var printContents = document.getElementById('studentsTable').outerHTML;
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = "<h2>Student List</h2>" + printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+            location.reload();
+        });
+        $("#download").click(function () {
+            var table = document.getElementById('studentsTable');
+            var workbook = XLSX.utils.table_to_book(table, { sheet: "Students" });
+            XLSX.writeFile(workbook, 'DeletedStudent.xlsx');
+        });
+    </script>
+}

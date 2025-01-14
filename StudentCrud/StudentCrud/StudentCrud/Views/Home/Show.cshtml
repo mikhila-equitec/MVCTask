@@ -1,0 +1,119 @@
+﻿@model IEnumerable<StudentCrud.Models.StudentModel>
+<script src=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+@{
+    ViewBag.Title = "Show";
+
+}
+
+<h2>Students</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Sr no")
+        </th>
+        <th>
+            @Html.DisplayName("Name")
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.RollNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dept)
+        </th>*@
+        <th>
+            @Html.DisplayName("Age")
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>*@
+        @*<th>
+            @Html.DisplayName("Address")
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNum)
+        </th>
+        <th>
+            @Html.DisplayName("Actions")
+        </th>
+    </tr>
+    @{ int count = 1;}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @count
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SName)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.RollNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dept)
+            </td>*@
+
+            <td>
+                @(DateTime.Now.Subtract(item.DOB).Days/365)
+                @*@item.DOB.ToString("dd-MM-yyyy")*@
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SAddress)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNum)
+            </td>
+            <td>
+                @*@Html.ActionLink("", "Edit", new { id = item.Id }) |*@
+                <a href="@Url.Action("Edit", new { id = item.Id })">
+                    <i class="fa fa-edit" style="font-size:25px;"> <span style="color:black;">|</span></i>
+                </a>
+                <a href="@Url.Action("ViewD", new { id = item.Id })">
+                    <i class="fa fa-search" style="font-size:20px;"><span style="color:black; padding-left:10px">|</span></i>
+                </a>
+                <a href="@Url.Action("Delete", new { id = item.Id })">
+                    <i class="fa fa-remove"style="font-size:25px; font-weight:10px;"><span style="color:black;"> |</span> </i>
+                </a>
+
+               
+               
+                @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+            </td>
+            @*@Html.Value(Convert.ToInt32(@count = @count + 1))*@
+            @{ count = count + 1; }
+        </tr>
+
+    }
+
+</table>
+<div>
+    @if (ViewBag.TotalPages > 1)
+    {
+        <ul class="pagination">
+            @if (ViewBag.CurrentPage > 1)
+            {
+                <li><a href="@Url.Action("Show", new { page =    ViewBag.CurrentPage - 1 })">Previous</a></li>
+            }
+
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="@(i == ViewBag.CurrentPage ? "active" : "")">
+                    <a href="@Url.Action("Show", new { page = i })">@i</a>
+                </li>
+            }
+
+            @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+            {
+                <li><a href="@Url.Action("Show", new { page = ViewBag.CurrentPage + 1 })">Next</a></li>
+            }
+        </ul>
+    }
+</div>

@@ -1,0 +1,56 @@
+﻿@model StudentCrud.Models.StudentModel
+
+@{
+    ViewBag.Title = "ViewDeleted";
+}
+
+<div class="container" style="max-width:600px; margin:auto; padding:20px; background-color:aliceblue; box-shadow:0px 0px 10px 2px; border-radius:3px;">
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+        <h2>
+            Deleted Students
+        </h2>
+       
+    </div>
+    <hr />
+    <dl style="text-align:center;">
+        <div style="margin-bottom: 15px; text-align:center;">
+            <dt style="font-weight:bold;">@Html.DisplayNameFor(model => model.SName)</dt>
+            <dd>@Html.DisplayFor(model => model.SName)</dd>
+        </div>
+
+        <div style="margin-bottom: 15px; text-align:center;">
+            <dt style="font-weight:bold;">@Html.DisplayNameFor(model => model.RollNo)</dt>
+            <dd>@Html.DisplayFor(model => model.RollNo)</dd>
+        </div>
+
+        <div style="margin-bottom: 15px; text-align:center;">
+            <dt style="font-weight:bold;">@Html.DisplayNameFor(model => model.Dept)</dt>
+            <dd>@Html.DisplayFor(model => model.Dept)</dd>
+        </div>
+
+        <div style="margin-bottom: 15px; text-align:center;">
+            <dt style="font-weight:bold;">@Html.DisplayNameFor(model => model.DOB)</dt>
+            <dd>@Model.DOB.ToString("dd-MM-yyyy")</dd>
+        </div>
+
+        <div style="margin-bottom: 15px; text-align:center;">
+            <dt style="font-weight:bold;">@Html.DisplayNameFor(model => model.Gender)</dt>
+            <dd>@Html.DisplayFor(model => model.Gender)</dd>
+        </div>
+
+        <div style="margin-bottom: 15px; text-align:center;">
+            <dt style="font-weight:bold;">@Html.DisplayNameFor(model => model.SAddress)</dt>
+            <dd>@Html.DisplayFor(model => model.SAddress)</dd>
+        </div>
+
+        <div style="margin-bottom: 15px; text-align:center;">
+            <dt style="font-weight:bold;">@Html.DisplayNameFor(model => model.PhoneNum)</dt>
+            <dd>@Html.DisplayFor(model => model.PhoneNum)</dd>
+        </div>
+    </dl>
+    <div style="text-align:center;">
+        <p>
+            @Html.ActionLink("Back to List", "ShowDeleted", null, new { @class = "btn btn-primary" })
+        </p>
+    </div>
+</div>

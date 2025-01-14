@@ -1,0 +1,107 @@
+﻿@model StudentCrud.Models.StudentModel
+
+@{
+    ViewBag.Title = "Insert";
+}
+
+
+
+<div class="container border-opacity-25" style=" max-width:500px; border-radius:3px; background-color:aliceblue;box-shadow:0px 0px 10px 2px; ">
+    <br />
+
+    <h2 style="margin-left:38%">Form</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <hr />
+        <div class="form" style="margin-left:20%; ">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <label>Name</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.RollNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.RollNo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RollNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Department</label>
+                <div class="col-md-10">
+
+                    @Html.DropDownListFor(model => model.DeptId, new SelectList(ViewBag.dept, "DeptId", "Dept"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DeptId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @*<input type="date" value="DOB" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })*@
+                    @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                    @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="form-group" class="form-control">
+                @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control" } })*@
+                    <input type="radio" name="gender" value="Male" />
+                    <label>Male</label>
+                    <input type="radio" name="gender" value="Female" />
+                    <label>Female</label>
+                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+
+            <div class="form-group">
+
+                <label>Address</label>
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.SAddress, new { @class = "form-control", rows = 4, cols = 50 }
+                    )
+                    @Html.ValidationMessageFor(model => model.SAddress, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model.PhoneNum, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <lable>Contact</lable>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PhoneNum, new { htmlAttributes = new { @class = "form-control" } })
+                    @*<input type="number" name="PhoneNum" maxlength="10" pattern="\d{10}" class="form-control" />*@
+                    @Html.ValidationMessageFor(model => model.PhoneNum, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-primary px-5" style="margin-left:20%" />
+                </div>
+                <br />
+            </div>
+        </div>
+    }
+</div>
+<br />
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    
+    
+
+}
