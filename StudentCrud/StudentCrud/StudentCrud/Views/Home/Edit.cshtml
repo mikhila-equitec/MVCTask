@@ -1,4 +1,4 @@
-﻿
+
 
 @model StudentCrud.Models.StudentModel
 
@@ -37,38 +37,65 @@
             @*<div class="form-group">
             <label>Department</label>
             <div class="col-md-10">
-
                 @Html.DropDownListFor(model => model.DeptId, new SelectList(ViewBag.dept, "DeptId", "Dept"), new { @class = "form-control",@Value=Model.Dept})
                 @Html.ValidationMessageFor(model => model.DeptId, "", new { @class = "text-danger" })
             </div>
         </div>*@
-            @*<div class="form-group">
+            <div class="mb-3 row">
                 @Html.Label("Department")
-                <div class="col-md-10">
-                    @Html.DropDownListFor(
-                             model => model.DeptId,
-                             (SelectList)ViewBag.dept,
-                             "Select Department",
-                             new { @class = "form-control", id = "DeptId" }
-                         )
-                    @Html.ValidationMessageFor(model => model.DeptId, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
+            </div>
+            <div class="col-sm-10">
+                @Html.DropDownListFor(
+                                                         model => model.DeptId,
+                                                         new SelectList(ViewBag.dep, "DeptId", "Dept", Model.DeptId),
+                                                         new { @class = "form-control" })
 
+                @Html.ValidationMessageFor(model => model.DeptId, "", new { @class = "text-danger" })
+
+            </div>
+
+
+
+            @*<div class="form-group">
+            @Html.Label("Department")
+            <div class="col-sm-10">
+                @Html.DropDownListFor(
+                         model => model.Dept,
+                         (IEnumerable<SelectListItem>)ViewBag.dep,
+                         new { @class = "form-control", id = "DeptId" }
+                     )
+            </div>
+        </div>*@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.DOB, new { @class = "form-control", id = "DOB", @Value = Model.DOB.ToString("yyyy-MM-dd") })
+                    @Html.TextBoxFor(model => model.DOB, new { @class = "form-control", id = "DOB", type = "date", @Value = Model.DOB.ToString("yyyy-MM-dd") })
                 </div>
             </div>
             <br />
-            <div class="form-group">
-                @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+            @*<div class="form-group">
+                @Html.Label("Gender", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control", id = "Gender" } })
+                    <div class="form-check">
+                        @Html.RadioButtonFor(model => model.Gender, "Male", new { @class = "form-check-input", id = "Gender", name = "gender", value = "Male" })
+                        @Html.Label("GenderMale", "Male", new { @class = "form-check-label", @for = "Male" })
+                    </div>
+                    <div class="form-check">
+                        @Html.RadioButtonFor(model => model.Gender, "Female", new { @class = "form-check-input", id = "Gender", name = "gender", value = "Female" })
+                        @Html.Label("GenderFemale", "Female", new { @class = "form-check-label", @for = "Female" })
+                    </div>
                 </div>
-            </div>
+            </div>*@
+         
+
+            <div class="form-group" class="form-control">
+    @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+            @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+        </div>
+    </div>
             <br />
             <div class="form-group">
                 @Html.Label("Address")
@@ -81,6 +108,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.PhoneNum, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
+                    btn
                     @Html.EditorFor(model => model.PhoneNum, new { htmlAttributes = new { @class = "form-control", id = "PhoneNum" } })
                 </div>
             </div>
@@ -94,7 +122,7 @@
     </form>
     <br />
     <div>
-        @Html.ActionLink("Back to List", "/", null, new { @class = "btn btn-secondary", style = "margin-left:36%" })
+        @Html.ActionLink("Back to List", "/", null, new { @class = "btn -secondary", style = "margin-left:36%" })
     </div>
 
     <div id="updateStatus"></div>
@@ -109,6 +137,7 @@
                 SName: $('#SName').val(),
                 RollNo: $('#RollNo').val(),
                 DeptId: $('#DeptId').val(),
+                Dept: $('#Dept').val(),
                 DOB: $('#DOB').val(),
                 Gender: $('#Gender').val(),
                 SAddress: $('#SAddress').val(),
