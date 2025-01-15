@@ -1,4 +1,4 @@
-﻿using StudentCrud.Models;
+using StudentCrud.Models;
 
 using System;
 using System.Collections.Generic;
@@ -28,19 +28,9 @@ namespace StudentCrud.Repository
         {
             using (var con = new SqlConnection(conn))
             {
-                try
-                {
-
                     con.Open();
                     string sql = "insert into studentData(SName,RollNo,DeptID,DOB,Gender,SAddress,PhoneNum) values(@SName,@RollNo,@DeptID,@DOB,@Gender,@SAddress,@PhoneNum)";
-                    con.Execute(sql, sm);
-                }
-                catch (Exception e)
-                {
-                    
-                }
-                
-            }
+                    con.Execute(sql, sm);            }
         }
 
         //Delte
@@ -87,15 +77,15 @@ namespace StudentCrud.Repository
         //View
         public StudentModel viewData(int Id)
         {
-            using (var con= new SqlConnection(conn))
+            using (var con = new SqlConnection(conn))
             {
                 con.Open();
-                string sql = "select sdb.SName, sdb.RollNo, sdb.DOB, sdb.Gender, sdb.SAddress, sdb.PhoneNum, d.Dept FROM studentData sdb LEFT JOIN Departments d ON sdb.DeptId = d.DeptId WHERE sdb.Id = @Id";
+                 string sql = "select sdb.*, d.Dept FROM studentData sdb LEFT JOIN Departments d ON sdb.DeptId = d.DeptId WHERE sdb.Id = @Id";
+                //string sql = "select * from studentData where Id=@Id";
                 //string sql = "select * from studentData";
                 return con.QueryFirstOrDefault<StudentModel>(sql, new { Id });
             }
         }
-
         //ViewDeleted
         public StudentModel viewDeletedData(int Id)
         {
@@ -124,11 +114,9 @@ namespace StudentCrud.Repository
         {
             using (var con = new SqlConnection(conn))
             {
-                string sql = "update studentData SET SName = @SName, RollNo = @RollNo, DOB = @DOB, Gender = @Gender, SAddress = @SAddress, PhoneNum = @PhoneNum WHERE Id = @Id";
+                string sql = "update studentData SET SName = @SName, RollNo = @RollNo, DeptId=@DeptId, DOB = @DOB, Gender = @Gender, SAddress = @SAddress, PhoneNum = @PhoneNum WHERE Id = @Id";
                 con.Execute(sql, student);
             }
         }
-
-
     }
 }
